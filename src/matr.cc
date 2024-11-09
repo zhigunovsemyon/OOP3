@@ -278,3 +278,10 @@ Matrix & Matrix::transposeSq_() {
 	}
 	return *this;
 }
+
+Matrix & Matrix::operator=(Matrix otherscopy){
+	std::swap(otherscopy.ptr_, ptr_);
+	std::swap(otherscopy.line_count_, line_count_);
+	std::swap(otherscopy.row_count_, row_count_);
+	return *this;
+}

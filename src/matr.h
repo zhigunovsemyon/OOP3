@@ -28,6 +28,9 @@ public:
 	// Конструктор копирования
 	Matrix(Matrix const & other);
 
+	// Операция присвоения с перезаписью
+	Matrix & operator=(Matrix other);
+
 	// Деструктор
 	~Matrix();
 

@@ -26,6 +26,8 @@ int main(void) {
 	m2.transpose();
 
 	(m1*=m2).transpose().print();
+	m1 = m2;
+	m1.print();
 
 	delete &m2;
 
