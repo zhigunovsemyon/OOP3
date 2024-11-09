@@ -65,16 +65,34 @@ public:
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix & add(Matrix const & other);
 
+	inline Matrix & operator+=(Matrix const & other) { return add(other); }
+
 	/*Вычитание из данной матрицы другой матрицы other.
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix & substract(Matrix const & other);
+
+	inline Matrix & operator-=(Matrix const & other) {
+		return substract(other);
+	}
 
 	/*Уиножение данной матрицы на другую матрицу other.
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix & multiply(Matrix const & other);
 
+	inline Matrix & operator*=(Matrix const & other) {
+		return multiply(other);
+	}
+
 	// Сравнение двух матриц на равенство/неравенство
 	bool isEqualTo(Matrix const & other) const;
+
+	inline bool operator==(Matrix const & other) const {
+		return isEqualTo(other);
+	}
+
+	inline bool operator!=(Matrix const & other) const {
+		return !isEqualTo(other);
+	}
 
 	// Транспонирование матрицы
 	inline Matrix & transpose() {

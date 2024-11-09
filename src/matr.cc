@@ -256,7 +256,7 @@ bool Matrix::isEqualTo(Matrix const & other) const {
 
 Matrix & Matrix::transposeNonSq_() {
 	// Создание пустой матрицы транспонированного размера
-	Matrix Tmp{this->line_count_, this->row_count_};
+	Matrix Tmp{this->row_count_, this->line_count_};
 
 	// Перенос значений из старой матрицы в новую
 	for (int i{0}; i < this->line_count_; ++i) {
@@ -267,6 +267,7 @@ Matrix & Matrix::transposeNonSq_() {
 	// Перестановка значений для деструкторов
 	std::swap(Tmp.ptr_, this->ptr_);
 	std::swap(line_count_, row_count_);
+	std::swap(Tmp.line_count_, Tmp.row_count_);
 	return *this;
 }
 

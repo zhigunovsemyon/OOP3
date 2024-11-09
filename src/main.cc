@@ -19,16 +19,15 @@ int main(void) {
 	std::cin >> m;
 	std::cout << "Число столбцов: ";
 	std::cin >> n;
-	Matrix & heapm = *new Matrix(m, n);
-	std::cout << "Конечные размеры матрицы: " << heapm.get_line_count()
-		  << " на " << heapm.get_row_count() << '\n';
 
-	std::cout << "Матрица до:\n";
-	heapm.randomise(0, 9).print();
+	Matrix m1{m,n};
+	m1.randomise(80, 0).print();
+	Matrix &m2 = *new Matrix{m1};
+	m2.transpose();
 
-	std::cout << "Матрица после:\n";
-	heapm.transpose().print();
+	(m1*=m2).transpose().print();
 
-	delete &heapm;
+	delete &m2;
+
 	return EXIT_SUCCESS;
 }
