@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream> /*std::size_t; std::rand(); std::cout*/
 
 class Matrix {
 private:
@@ -104,3 +105,15 @@ public:
 			       : transposeNonSq_();
 	};
 };
+
+// Скрещивание матрицы и cout
+inline std::ostream & operator<<(std::ostream & ost, Matrix const & m) {
+	m.print();
+	return ost;
+}
+
+// Скрещивание матрицы и cin
+inline std::istream & operator>>(std::istream & ist, Matrix & m) {
+	m.fill();
+	return ist;
+}

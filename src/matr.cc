@@ -1,6 +1,5 @@
 #include "matr.h"
 #include <cstring>  /*std::memcpy()*/
-#include <iostream> /*std::size_t; std::rand(); std::cout*/
 #include <utility>  /*swap() */
 
 // Вывод трассировки

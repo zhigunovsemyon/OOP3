@@ -5,9 +5,8 @@
 Результат выполнения в текущем объекте.
 */
 
-#include "matr.h"   /* Матрица */
+#include "matr.h"   /* Матрица и iostream */
 #include <ctime>    /*time()*/
-#include <iostream> /*cout*/
 
 int main(void) {
 	// Инициализация генератора случайных чисел
@@ -21,15 +20,8 @@ int main(void) {
 	std::cin >> n;
 
 	Matrix m1{m,n};
-	m1.randomise(80, 0).print();
-	Matrix &m2 = *new Matrix{m1};
-	m2.transpose();
-
-	(m1*=m2).transpose().print();
-	m1 = m2;
-	m1.print();
-
-	delete &m2;
+	std::cin >> m1;
+	std::cout << m1;
 
 	return EXIT_SUCCESS;
 }
