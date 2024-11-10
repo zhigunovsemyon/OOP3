@@ -298,3 +298,16 @@ Matrix Matrix::product(Matrix & other) const {
 	Matrix New {*this};
 	return New.multiply(other);
 }
+
+Matrix & Matrix::multiply(int const n) {
+	for (int i{0}; i < this->line_count_; ++i) {
+		for (int j{0}; j < this->row_count_; ++j)
+			this->ptr_[i][j] *= n;
+	}
+	return *this;
+}
+
+Matrix Matrix::product(int const n) const{
+	Matrix New {*this};
+	return New.multiply(n);
+}

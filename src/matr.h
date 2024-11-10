@@ -79,13 +79,18 @@ public:
 		return substract(other);
 	}
 
-	/*Уиножение данной матрицы на другую матрицу other.
+	/*Умножение данной матрицы на другую матрицу other.
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix & multiply(Matrix const & other);
 
 	inline Matrix & operator*=(Matrix const & other) {
 		return multiply(other);
 	}
+
+	/*Умножение данной матрицы на число.*/
+	Matrix & multiply(int const);
+
+	inline Matrix & operator*=(int const n) { return multiply(n); }
 
 	// Сравнение двух матриц на равенство/неравенство
 	bool isEqualTo(Matrix const & other) const;
@@ -119,6 +124,11 @@ public:
 	Matrix product(Matrix & other) const;
 
 	inline Matrix operator*(Matrix & other) const { return product(other); }
+
+	// Создание новой матрицы, равной произведению матрицы на число
+	Matrix product(int const i) const;
+
+	inline Matrix operator*(int const i) const { return product(i); }
 };
 
 // Скрещивание матрицы и cout
@@ -132,3 +142,6 @@ inline std::istream & operator>>(std::istream & ist, Matrix & m) {
 	m.fill();
 	return ist;
 }
+
+//Произвдение числа на матрицу равно произведению матрицы на число
+inline Matrix operator*(int const i, Matrix & m) { return m.product(i); }
