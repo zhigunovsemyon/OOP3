@@ -103,7 +103,22 @@ public:
 		return (this->row_count_ == this->line_count_)
 			       ? transposeSq_()
 			       : transposeNonSq_();
-	};
+	}
+
+	// Создание новой матрицы, равной сумме двух
+	Matrix sum(Matrix other) const;
+
+	inline Matrix operator+(Matrix & other) const { return sum(other); }
+
+	// Создание новой матрицы, равной разности двух
+	Matrix diff(Matrix & other) const;
+
+	inline Matrix operator-(Matrix & other) const { return diff(other); }
+
+	// Создание новой матрицы, равной произведению двух
+	Matrix product(Matrix & other) const;
+
+	inline Matrix operator*(Matrix & other) const { return product(other); }
 };
 
 // Скрещивание матрицы и cout

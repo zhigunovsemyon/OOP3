@@ -1,6 +1,6 @@
 #include "matr.h"
-#include <cstring>  /*std::memcpy()*/
-#include <utility>  /*swap() */
+#include <cstring> /*std::memcpy()*/
+#include <utility> /*swap() */
 
 // Вывод трассировки
 std::ostream & trace = std::cout;
@@ -278,9 +278,23 @@ Matrix & Matrix::transposeSq_() {
 	return *this;
 }
 
-Matrix & Matrix::operator=(Matrix otherscopy){
+Matrix & Matrix::operator=(Matrix otherscopy) {
 	std::swap(otherscopy.ptr_, ptr_);
 	std::swap(otherscopy.line_count_, line_count_);
 	std::swap(otherscopy.row_count_, row_count_);
 	return *this;
+}
+
+Matrix Matrix::sum(Matrix other) const {
+	return other.add(*this);
+}
+
+Matrix Matrix::diff(Matrix & other) const {
+	Matrix New {*this};
+	return New.substract(other);
+}
+
+Matrix Matrix::product(Matrix & other) const {
+	Matrix New {*this};
+	return New.multiply(other);
 }

@@ -5,8 +5,8 @@
 Результат выполнения в текущем объекте.
 */
 
-#include "matr.h"   /* Матрица и iostream */
-#include <ctime>    /*time()*/
+#include "matr.h" /* Матрица и iostream */
+#include <ctime>  /*time()*/
 
 int main(void) {
 	// Инициализация генератора случайных чисел
@@ -19,9 +19,16 @@ int main(void) {
 	std::cout << "Число столбцов: ";
 	std::cin >> n;
 
-	Matrix m1{m,n};
+	Matrix &m1 = *new Matrix{m, n};
 	std::cin >> m1;
-	std::cout << m1;
+	Matrix m2{m1};
+	
+	std::cout << "Матрица 1:\n" << m1;
+	std::cout << "Матрица 2:\n" << m2;
+	std::cout << "Матрица 2*1:\n" << m2 * m1;
+	std::cout << "Матрица 1:\n" << m1;
+	std::cout << "Матрица 2:\n" << m2;
 
+	delete &m1;
 	return EXIT_SUCCESS;
 }
