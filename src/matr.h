@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream> /*std::size_t; std::rand(); std::cout*/
+#include <iostream> /*std::size_t; std::rand(); std::cout; exit()*/
 
 class Matrix {
 public:

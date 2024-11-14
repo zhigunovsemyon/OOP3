@@ -173,7 +173,7 @@ Matrix & Matrix::add(Matrix const & other) {
 	if (other.row_count_ != this->row_count_ ||
 	    other.line_count_ != this->line_count_) {
 		std::cerr << "Сложение матриц разных размерностей!\n";
-		return *this;
+		exit(EXIT_FAILURE);
 	}
 
 	// Добавление элементов другой матрицы к данной
@@ -191,7 +191,7 @@ Matrix & Matrix::substract(Matrix const & other) {
 	if (other.row_count_ != this->row_count_ ||
 	    other.line_count_ != this->line_count_) {
 		std::cerr << "Вычитание матриц разных размерностей!\n";
-		return *this;
+		exit(EXIT_FAILURE);
 	}
 
 	// Вычитание элементов другой матрицы из данной матрицы.
@@ -217,10 +217,10 @@ Matrix & Matrix::multiply(Matrix const & other) {
 	// Если размеры не совпадают, аварийное завершение функции
 	if (this->row_count_ != other.line_count_) {
 		std::cerr << "Умножение не согласованных матриц!\n";
-		return *this;
+		exit(EXIT_FAILURE);
 	}
-	// Локальная копия текущей матрицы
-	// Временная матрица, в которую будет сохранятся результат
+
+	// Временная матрица, в которую будет сохраняться результат
 	Matrix Tmp{this->line_count_, other.row_count_};
 
 	// Подсчёт каждой ячейки
@@ -318,8 +318,8 @@ int & Matrix::Line::operator[](long i) const {
 		i = len_ + i;
 
 	if (i < 0 || i >= len_) {
-		std::cerr << "Доступ к элементу по некорректному индексу!\n";
-		std::cerr << "Запрашиваемый столбец: " << i
+		std::cerr << "Доступ к элементу по некорректному индексу!\n"
+			  << "Запрашиваемый столбец: " << i
 			  << " при размере столбца " << len_ << '\n';
 		exit(EXIT_FAILURE);
 	}
@@ -332,8 +332,8 @@ Matrix::Line Matrix::operator[](long i) const {
 		i = line_count_ + i;
 
 	if (i < 0 || i >= line_count_) {
-		std::cerr << "Доступ к элементу по некорректному индексу!\n";
-		std::cerr << "Запрашиваемая строка: " << i
+		std::cerr << "Доступ к элементу по некорректному индексу!\n"
+			  << "Запрашиваемая строка: " << i
 			  << " при числе строк " << line_count_ << '\n';
 		exit(EXIT_FAILURE);
 	}
