@@ -22,10 +22,10 @@ public:
 	Matrix & fill(long line = 0, long column = 0);
 
 	// Получение числа строк матрицы
-	inline long get_line_count() const { return this->line_count_; }
+	long get_line_count() const { return this->line_count_; }
 
 	// Получение числа строк матрицы
-	inline long get_row_count() const { return this->row_count_; }
+	long get_row_count() const { return this->row_count_; }
 
 	// Вывод матрицы в stdout
 	void print() const;
@@ -34,7 +34,7 @@ public:
 	Matrix & randomise(int max, int min);
 
 	/*Метод зануления матрицы*/
-	inline Matrix & zero() { return this->fill_with(0); }
+	Matrix & zero() { return this->fill_with(0); }
 
 	/*Метод заполнения матрицы одним числом*/
 	Matrix & fill_with(int);
@@ -52,13 +52,13 @@ public:
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix & add(Matrix const & other);
 
-	inline Matrix & operator+=(Matrix const & other) { return add(other); }
+	Matrix & operator+=(Matrix const & other) { return add(other); }
 
 	/*Вычитание из данной матрицы другой матрицы other.
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix & substract(Matrix const & other);
 
-	inline Matrix & operator-=(Matrix const & other) {
+	Matrix & operator-=(Matrix const & other) {
 		return substract(other);
 	}
 
@@ -66,28 +66,28 @@ public:
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix & multiply(Matrix const & other);
 
-	inline Matrix & operator*=(Matrix const & other) {
+	Matrix & operator*=(Matrix const & other) {
 		return multiply(other);
 	}
 
 	/*Умножение данной матрицы на число.*/
 	Matrix & multiply(int const);
 
-	inline Matrix & operator*=(int const n) { return multiply(n); }
+	Matrix & operator*=(int const n) { return multiply(n); }
 
 	// Сравнение двух матриц на равенство/неравенство
 	bool isEqualTo(Matrix const & other) const;
 
-	inline bool operator==(Matrix const & other) const {
+	bool operator==(Matrix const & other) const {
 		return isEqualTo(other);
 	}
 
-	inline bool operator!=(Matrix const & other) const {
+	bool operator!=(Matrix const & other) const {
 		return !isEqualTo(other);
 	}
 
 	// Транспонирование матрицы
-	inline Matrix & transpose() {
+	Matrix & transpose() {
 		return (this->row_count_ == this->line_count_)
 			       ? transposeSq_()
 			       : transposeNonSq_();
@@ -96,22 +96,22 @@ public:
 	// Создание новой матрицы, равной сумме двух
 	Matrix sum(Matrix other) const;
 
-	inline Matrix operator+(Matrix & other) const { return sum(other); }
+	Matrix operator+(Matrix & other) const { return sum(other); }
 
 	// Создание новой матрицы, равной разности двух
 	Matrix diff(Matrix & other) const;
 
-	inline Matrix operator-(Matrix & other) const { return diff(other); }
+	Matrix operator-(Matrix & other) const { return diff(other); }
 
 	// Создание новой матрицы, равной произведению двух
 	Matrix product(Matrix & other) const;
 
-	inline Matrix operator*(Matrix & other) const { return product(other); }
+	Matrix operator*(Matrix & other) const { return product(other); }
 
 	// Создание новой матрицы, равной произведению матрицы на число
 	Matrix product(int const i) const;
 
-	inline Matrix operator*(int const i) const { return product(i); }
+	Matrix operator*(int const i) const { return product(i); }
 
 	/*Получение доступа к i-й строке. Поддерживается индексация с конца*/
 	int * operator[](long i) const;
