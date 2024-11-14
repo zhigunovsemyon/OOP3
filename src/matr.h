@@ -2,23 +2,6 @@
 #include <iostream> /*std::size_t; std::rand(); std::cout*/
 
 class Matrix {
-private:
-	/*Сокрытые поля*/
-	int ** ptr_;	  // Указатель на непосредственно матрицу
-	long row_count_;  // Число столбцов
-	long line_count_; // Число строк
-
-	/*Сокрытые методы*/
-	Matrix & transposeSq_();    // Транспонирование квадратной матрицы
-	Matrix & transposeNonSq_(); // Транспонирование не квадрат матрицы
-
-	void constructor_(long const lines,
-			  long const rows); // Общий конструктор
-
-	// Подсчёт ячейки при умножении матриц
-	void calcCellForMult_(Matrix const & first, Matrix const & second,
-			      int const line, int const row);
-
 public:
 	// Конструктор квадратной матрицы, либо пустой
 	Matrix(long const size = 0);
@@ -129,6 +112,23 @@ public:
 	Matrix product(int const i) const;
 
 	inline Matrix operator*(int const i) const { return product(i); }
+
+private:
+	/*Сокрытые поля*/
+	int ** ptr_;	  // Указатель на непосредственно матрицу
+	long row_count_;  // Число столбцов
+	long line_count_; // Число строк
+
+	/*Сокрытые методы*/
+	Matrix & transposeSq_();    // Транспонирование квадратной матрицы
+	Matrix & transposeNonSq_(); // Транспонирование не квадрат матрицы
+
+	void constructor_(long const lines,
+			  long const rows); // Общий конструктор
+
+	// Подсчёт ячейки при умножении матриц
+	void calcCellForMult_(Matrix const & first, Matrix const & second,
+			      int const line, int const row);
 };
 
 // Скрещивание матрицы и cout
