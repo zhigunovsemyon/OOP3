@@ -109,7 +109,7 @@ Matrix & Matrix::fill_with(int const num) {
 	return *this;
 }
 
-/*Доступ к определённой строке line матрицы*/
+/*Доступ к элементу [line][column] матрицы*/
 int & Matrix::get_element(long line, long column) const {
 	/*Если пользователь запросил отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
@@ -310,4 +310,11 @@ Matrix & Matrix::multiply(int const n) {
 Matrix Matrix::product(int const n) const{
 	Matrix New {*this};
 	return New.multiply(n);
+}
+
+int * Matrix::operator[](long i) const {
+	if (i < 0)
+		i = line_count_ - i;
+
+	return ptr_[i];
 }

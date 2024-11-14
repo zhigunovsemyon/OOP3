@@ -113,14 +113,17 @@ public:
 
 	inline Matrix operator*(int const i) const { return product(i); }
 
+	/*Получение доступа к i-й строке. Поддерживается индексация с конца*/
+	int * operator[](long i) const;
+
 private:
 	/*Сокрытые поля*/
-	int ** ptr_;	  // Указатель на непосредственно матрицу
+	int ** ptr_; // Указатель на непосредственно матрицу
 	long row_count_;  // Число столбцов
 	long line_count_; // Число строк
 
 	/*Сокрытые методы*/
-	Matrix & transposeSq_();    // Транспонирование квадратной матрицы
+	Matrix & transposeSq_(); // Транспонирование квадратной матрицы
 	Matrix & transposeNonSq_(); // Транспонирование не квадрат матрицы
 
 	void constructor_(long const lines,
@@ -143,5 +146,7 @@ inline std::istream & operator>>(std::istream & ist, Matrix & m) {
 	return ist;
 }
 
-//Произвдение числа на матрицу равно произведению матрицы на число
-inline Matrix operator*(int const i, Matrix & m) { return m.product(i); }
+// Произвдение числа на матрицу равно произведению матрицы на число
+inline Matrix operator*(int const i, Matrix & m) {
+	return m.product(i);
+}
