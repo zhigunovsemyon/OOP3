@@ -86,7 +86,7 @@ void Matrix::print() const {
 }
 
 /*Метод для заполнения матрицы случайными числами*/
-Matrix & Matrix::randomise(int max, int min) {
+Matrix & Matrix::randomise(int min, int max) {
 	/*Переворот значений min и max*/
 	if (min > max)
 		std::swap(max, min);
@@ -290,12 +290,12 @@ Matrix Matrix::sum(Matrix other) const {
 }
 
 Matrix Matrix::diff(Matrix & other) const {
-	Matrix New {*this};
+	Matrix New{*this};
 	return New.substract(other);
 }
 
 Matrix Matrix::product(Matrix & other) const {
-	Matrix New {*this};
+	Matrix New{*this};
 	return New.multiply(other);
 }
 
@@ -307,15 +307,38 @@ Matrix & Matrix::multiply(int const n) {
 	return *this;
 }
 
-Matrix Matrix::product(int const n) const{
-	Matrix New {*this};
+Matrix Matrix::product(int const n) const {
+	Matrix New{*this};
 	return New.multiply(n);
 }
 
-int * Matrix::operator[](long i) const {
+int & Matrix::Line::operator[](long i) const {
+	/*Отсчёт с конца*/
+	if (i < 0)
+		i = len_ + i;
+
+	if (i < 0 || i >= len_) {
+		std::cerr << "Доступ к элементу по некорректному индексу!\n";
+		std::cerr << "Запрашиваемый столбец: " << i
+			  << " при размере столбца " << len_ << '\n';
+		exit(EXIT_FAILURE);
+	}
+	return ptr_[i];
+}
+
+Matrix::Line Matrix::operator[](long i) const {
 	/*Отсчёт с конца*/
 	if (i < 0)
 		i = line_count_ + i;
 
-	return ptr_[i];
+	if (i < 0 || i >= line_count_) {
+		std::cerr << "Доступ к элементу по некорректному индексу!\n";
+		std::cerr << "Запрашиваемая строка: " << i
+			  << " при числе строк " << line_count_ << '\n';
+		exit(EXIT_FAILURE);
+	}
+
+	/*Создание объекта Line с указателем на нужную строку и корректными
+	 * размерами*/
+	return {ptr_[i], row_count_};
 }

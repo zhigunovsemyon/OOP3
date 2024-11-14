@@ -3,6 +3,18 @@
 
 class Matrix {
 public:
+	/*Вспомогательный класс для доступа к элементам матрицы*/
+	class Line {
+	public:
+		Line(int * ptr, long len) { ptr_ = ptr, len_ = len; }
+	
+		int & operator[](long i) const;
+	
+	private:
+		int * ptr_; // Указатель на строку
+		long len_;  // Размер строки
+	};
+
 	// Конструктор квадратной матрицы, либо пустой
 	Matrix(long const size = 0);
 
@@ -31,7 +43,7 @@ public:
 	void print() const;
 
 	/*Метод для заполнения матрицы случайными числами*/
-	Matrix & randomise(int max, int min);
+	Matrix & randomise(int min, int max);
 
 	/*Метод зануления матрицы*/
 	Matrix & zero() { return this->fill_with(0); }
@@ -58,17 +70,13 @@ public:
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix & substract(Matrix const & other);
 
-	Matrix & operator-=(Matrix const & other) {
-		return substract(other);
-	}
+	Matrix & operator-=(Matrix const & other) { return substract(other); }
 
 	/*Умножение данной матрицы на другую матрицу other.
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix & multiply(Matrix const & other);
 
-	Matrix & operator*=(Matrix const & other) {
-		return multiply(other);
-	}
+	Matrix & operator*=(Matrix const & other) { return multiply(other); }
 
 	/*Умножение данной матрицы на число.*/
 	Matrix & multiply(int const);
@@ -78,9 +86,7 @@ public:
 	// Сравнение двух матриц на равенство/неравенство
 	bool isEqualTo(Matrix const & other) const;
 
-	bool operator==(Matrix const & other) const {
-		return isEqualTo(other);
-	}
+	bool operator==(Matrix const & other) const { return isEqualTo(other); }
 
 	bool operator!=(Matrix const & other) const {
 		return !isEqualTo(other);
@@ -113,17 +119,18 @@ public:
 
 	Matrix operator*(int const i) const { return product(i); }
 
-	/*Получение доступа к i-й строке. Поддерживается индексация с конца*/
-	int * operator[](long i) const;
+	/*Получение доступа к i-й строке. Поддерживается индексация с конца.
+	 *Возвращается вспомогательный объект*/
+	Line operator[](long i) const;
 
 private:
 	/*Сокрытые поля*/
-	int ** ptr_; // Указатель на непосредственно матрицу
+	int ** ptr_;	  // Указатель на непосредственно матрицу
 	long row_count_;  // Число столбцов
 	long line_count_; // Число строк
 
 	/*Сокрытые методы*/
-	Matrix & transposeSq_(); // Транспонирование квадратной матрицы
+	Matrix & transposeSq_();    // Транспонирование квадратной матрицы
 	Matrix & transposeNonSq_(); // Транспонирование не квадрат матрицы
 
 	void constructor_(long const lines,
