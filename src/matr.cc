@@ -313,8 +313,9 @@ Matrix Matrix::product(int const n) const{
 }
 
 int * Matrix::operator[](long i) const {
+	/*Отсчёт с конца*/
 	if (i < 0)
-		i = line_count_ - i;
+		i = line_count_ + i;
 
 	return ptr_[i];
 }
