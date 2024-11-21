@@ -315,7 +315,7 @@ Matrix Matrix::product(int const n) const {
 int & Matrix::Line::operator[](long i) const {
 	/*Отсчёт с конца*/
 	if (i < 0)
-		i = len_ + i;
+		i += len_;
 
 	if (i < 0 || i >= len_) {
 		std::cerr << "Доступ к элементу по некорректному индексу!\n"
@@ -329,7 +329,7 @@ int & Matrix::Line::operator[](long i) const {
 Matrix::Line Matrix::operator[](long i) const {
 	/*Отсчёт с конца*/
 	if (i < 0)
-		i = line_count_ + i;
+		i += line_count_;
 
 	if (i < 0 || i >= line_count_) {
 		std::cerr << "Доступ к элементу по некорректному индексу!\n"
