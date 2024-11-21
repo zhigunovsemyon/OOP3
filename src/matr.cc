@@ -1,5 +1,6 @@
 #include "matr.h"
 #include <cstring> /*std::memcpy()*/
+#include <ostream>
 #include <utility> /*swap() */
 
 // Вывод трассировки
@@ -76,12 +77,12 @@ Matrix::~Matrix() {
 }
 
 // Вывод матрицы в stdout
-void Matrix::print() const {
-	for (long i = 0; i < this->line_count_; i++) {
-		for (long j = 0; j < this->row_count_; j++)
-			std::cout << ptr_[i][j] << ' ';
+void Matrix::print(std::ostream & ost) const {
+	for (long i{0}; i < this->line_count_; i++) {
+		for (long j{0}; j < this->row_count_; j++)
+			ost << ptr_[i][j] << ' ';
 
-		std::cout << '\n';
+		ost << '\n';
 	}
 }
 
@@ -91,8 +92,8 @@ Matrix & Matrix::randomise(int min, int max) {
 	if (min > max)
 		std::swap(max, min);
 
-	for (long i = 0; i < this->line_count_; i++) {
-		for (long j = 0; j < this->row_count_; j++)
+	for (long i{0}; i < this->line_count_; i++) {
+		for (long j{0}; j < this->row_count_; j++)
 			this->ptr_[i][j] = min + std::rand() % (max + 1 - min);
 	}
 
@@ -101,8 +102,8 @@ Matrix & Matrix::randomise(int min, int max) {
 
 /*Метод зануления матрицы*/
 Matrix & Matrix::fill_with(int const num) {
-	for (long i = 0; i < this->line_count_; i++) {
-		for (long j = 0; j < this->row_count_; j++)
+	for (long i{0}; i < this->line_count_; i++) {
+		for (long j{0}; j < this->row_count_; j++)
 			ptr_[i][j] = num;
 	}
 
@@ -127,9 +128,9 @@ bool Matrix::set_element(long line, long column, int num) {
 	/*Если пользователь указал отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
 	if (column < 0)
-		column = this->row_count_ + column;
+		column += this->row_count_;
 	if (line < 0)
-		line = this->line_count_ + line;
+		line += this->line_count_;
 
 	/*Если итоговый индекс отрицательный, запись не осуществляется*/
 	if (line < 0 || column < 0)
@@ -177,8 +178,8 @@ Matrix & Matrix::add(Matrix const & other) {
 	}
 
 	// Добавление элементов другой матрицы к данной
-	for (long i = 0; i < this->line_count_; i++) {
-		for (long j = 0; j < this->row_count_; j++)
+	for (long i{0}; i < this->line_count_; i++) {
+		for (long j{0}; j < this->row_count_; j++)
 			this->ptr_[i][j] += other.ptr_[i][j];
 	}
 	return *this;
@@ -195,8 +196,8 @@ Matrix & Matrix::substract(Matrix const & other) {
 	}
 
 	// Вычитание элементов другой матрицы из данной матрицы.
-	for (long i = 0; i < this->line_count_; i++) {
-		for (long j = 0; j < this->row_count_; j++)
+	for (long i{0}; i < this->line_count_; i++) {
+		for (long j{0}; j < this->row_count_; j++)
 			this->ptr_[i][j] -= other.ptr_[i][j];
 	}
 

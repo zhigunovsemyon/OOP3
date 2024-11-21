@@ -40,7 +40,7 @@ public:
 	long get_row_count() const { return this->row_count_; }
 
 	// Вывод матрицы в stdout
-	void print() const;
+	void print(std::ostream & ost = std::cout) const;
 
 	/*Метод для заполнения матрицы случайными числами*/
 	Matrix & randomise(int min, int max);
@@ -126,7 +126,7 @@ public:
 	// Скрещивание матрицы и cout
 	friend inline std::ostream & operator<<(std::ostream & ost,
 						Matrix const & m) {
-		m.print();
+		m.print(ost);
 		return ost;
 	}
 
