@@ -6,13 +6,13 @@ public:
 	/*Вспомогательный класс для доступа к элементам матрицы*/
 	class Line {
 	public:
-		Line(int * ptr, long len) { ptr_ = ptr, len_ = len; }
-	
+		Line(int * const ptr, long const len) : ptr_{ptr}, len_{len} {}
+
 		int & operator[](long i) const;
-	
+
 	private:
-		int * ptr_; // Указатель на строку
-		long len_;  // Размер строки
+		int * const ptr_; // Указатель на строку
+		long const len_;  // Размер строки
 	};
 
 	// Конструктор квадратной матрицы, либо пустой
@@ -125,12 +125,12 @@ public:
 
 private:
 	/*Сокрытые поля*/
-	int ** ptr_;	  // Указатель на непосредственно матрицу
+	int ** ptr_; // Указатель на непосредственно матрицу
 	long row_count_;  // Число столбцов
 	long line_count_; // Число строк
 
 	/*Сокрытые методы*/
-	Matrix & transposeSq_();    // Транспонирование квадратной матрицы
+	Matrix & transposeSq_(); // Транспонирование квадратной матрицы
 	Matrix & transposeNonSq_(); // Транспонирование не квадрат матрицы
 
 	void constructor_(long const lines,
