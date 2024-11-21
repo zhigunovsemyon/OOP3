@@ -123,14 +123,26 @@ public:
 	 *Возвращается вспомогательный объект*/
 	Line operator[](long i) const;
 
+	// Скрещивание матрицы и cout
+	friend inline std::ostream & operator<<(std::ostream & ost,
+						Matrix const & m) {
+		m.print();
+		return ost;
+	}
+
+	// Произвдение числа на матрицу равно произведению матрицы на число
+	friend inline Matrix operator*(int const i, Matrix & m) {
+		return m.product(i);
+	}
+
 private:
 	/*Сокрытые поля*/
-	int ** ptr_; // Указатель на непосредственно матрицу
+	int ** ptr_;	  // Указатель на непосредственно матрицу
 	long row_count_;  // Число столбцов
 	long line_count_; // Число строк
 
 	/*Сокрытые методы*/
-	Matrix & transposeSq_(); // Транспонирование квадратной матрицы
+	Matrix & transposeSq_();    // Транспонирование квадратной матрицы
 	Matrix & transposeNonSq_(); // Транспонирование не квадрат матрицы
 
 	void constructor_(long const lines,
@@ -140,20 +152,3 @@ private:
 	void calcCellForMult_(Matrix const & first, Matrix const & second,
 			      int const line, int const row);
 };
-
-// Скрещивание матрицы и cout
-inline std::ostream & operator<<(std::ostream & ost, Matrix const & m) {
-	m.print();
-	return ost;
-}
-
-// Скрещивание матрицы и cin
-inline std::istream & operator>>(std::istream & ist, Matrix & m) {
-	m.fill();
-	return ist;
-}
-
-// Произвдение числа на матрицу равно произведению матрицы на число
-inline Matrix operator*(int const i, Matrix & m) {
-	return m.product(i);
-}
