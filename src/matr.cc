@@ -1,6 +1,5 @@
 #include "matr.h"
 #include <cstring> /*std::memcpy()*/
-#include <ostream>
 #include <utility> /*swap() */
 
 // Вывод трассировки
