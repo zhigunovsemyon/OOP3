@@ -17,6 +17,12 @@ int main(void) {
 	std::cin >> m;
 	std::cout << "Число столбцов: ";
 	std::cin >> n;
+	
+	/*Проверка на корректность ввода*/
+	if (!std::cin.good()) {
+		std::cout << "Некорректный ввод!\n";
+		return EXIT_FAILURE;
+	}
 
 	Matrix & m1 = *new Matrix{m, n};
 	m1.randomise(-10, 10);
