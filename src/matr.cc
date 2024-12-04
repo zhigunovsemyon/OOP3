@@ -46,14 +46,16 @@ Matrix::Matrix(long const lines, long const columns) {
 	this->zero();
 }
 
+/*Конструктор копирования*/
 Matrix::Matrix(Matrix const & other) {
 	// Создание новой матрицы с идентичной размерностью
 	this->constructor_(other.line_count_, other.row_count_);
 
 	/*Копирование содержимого другой матрицы в данную*/
-	for (long i = 0; i < other.line_count_; ++i) {
+	for (long i{0}; i < other.line_count_; ++i) {
 		std::memcpy(this->ptr_[i], other.ptr_[i],
-			    sizeof(ptr_[i][0]) * (std::size_t)other.row_count_);
+			    sizeof(ptr_[i][0]) *
+				    static_cast<std::size_t>(other.row_count_));
 	}
 }
 
