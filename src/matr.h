@@ -43,7 +43,7 @@ public:
 	void print(std::ostream & ost = std::cout) const;
 
 	/*Метод для заполнения матрицы случайными числами*/
-	Matrix & randomise(int min, int max);
+	Matrix & randomise(int a, int b = 0);
 
 	/*Метод зануления матрицы*/
 	Matrix & zero() { return this->fill_with(0); }

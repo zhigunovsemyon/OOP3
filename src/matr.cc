@@ -86,14 +86,14 @@ void Matrix::print(std::ostream & ost) const {
 }
 
 /*Метод для заполнения матрицы случайными числами*/
-Matrix & Matrix::randomise(int min, int max) {
-	/*Переворот значений min и max*/
-	if (min > max)
-		std::swap(max, min);
+Matrix & Matrix::randomise(int a, int b) {
+	/*Переворот значений*/
+	if (a > b)
+		std::swap(a, b);
 
 	for (long i{0}; i < this->line_count_; i++) {
 		for (long j{0}; j < this->row_count_; j++)
-			this->ptr_[i][j] = min + std::rand() % (max + 1 - min);
+			this->ptr_[i][j] = a + std::rand() % (b + 1 - a);
 	}
 
 	return *this;

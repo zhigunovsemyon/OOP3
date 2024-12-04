@@ -25,7 +25,7 @@ int main(void) {
 	}
 
 	Matrix & m1 = *new Matrix{m, n};
-	m1.randomise(-10, 10);
+	m1.randomise(10);
 
 	std::cout << "Матрица 1:\n" << m1 << '\n';
 
