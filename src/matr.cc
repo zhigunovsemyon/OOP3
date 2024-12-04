@@ -1,9 +1,13 @@
 #include "matr.h"
 #include <cstring> /*std::memcpy()*/
 #include <utility> /*swap() */
+#include <random> /*std::mt19937_64, std::random_device*/
 
 // Вывод трассировки
 std::ostream & trace = std::cout;
+
+// Сокрытый источник случайных чисел
+static std::mt19937_64 rnd_ {std::random_device{}()};
 
 void Matrix::constructor_(long const lines, long const rows) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
@@ -95,7 +99,7 @@ Matrix & Matrix::randomise(int a, int b) {
 
 	for (long i{0}; i < this->line_count_; i++) {
 		for (long j{0}; j < this->row_count_; j++)
-			this->ptr_[i][j] = a + std::rand() % (b + 1 - a);
+			this->ptr_[i][j] = a + rnd_() % (b + 1 - a);
 	}
 
 	return *this;
