@@ -97,15 +97,17 @@ Matrix & Matrix::randomise(int a, int b) {
 	if (a > b)
 		std::swap(a, b);
 
-	for (long i{0}; i < this->line_count_; i++) {
-		for (long j{0}; j < this->row_count_; j++)
-			this->ptr_[i][j] = a + rnd_() % (b + 1 - a);
+	for (long i{0}; i < this->line_count_; ++i) {
+		for (long j{0}; j < this->row_count_; ++j) {
+			/*Случайное число из диапазона a, b*/
+			ptr_[i][j] = std::uniform_int_distribution{a, b}(rnd_);
+		}
 	}
 
 	return *this;
 }
 
-/*Метод зануления матрицы*/
+/*Метод зполнения матрицы некоторым числом*/
 Matrix & Matrix::fill_with(int const num) {
 	for (long i{0}; i < this->line_count_; i++) {
 		for (long j{0}; j < this->row_count_; j++)
