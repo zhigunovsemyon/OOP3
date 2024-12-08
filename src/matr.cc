@@ -1,16 +1,21 @@
 #include "matr.h"
 #include <cstring> /*std::memcpy()*/
+#include <random>  /*std::mt19937_64, std::random_device*/
 #include <utility> /*swap() */
-#include <random> /*std::mt19937_64, std::random_device*/
 
 // Вывод трассировки
-std::ostream & trace = std::cout;
+#ifdef PRINTTRACE /*Выставляется в CMake*/
+#include <cstdio> /*std::printf()*/
+#define trace(...) std::printf(__VA_ARGS__)
+#else
+#define trace(...) /*Ничего не делать*/
+#endif
 
 // Сокрытый источник случайных чисел
-static std::mt19937_64 rnd_ {std::random_device{}()};
+static std::mt19937_64 rnd_{std::random_device{}()};
 
 void Matrix::constructor_(long const lines, long const rows) {
-	::trace << "Адрес созданного объекта: " << this << '\n';
+	trace("Адрес созданного объекта: %p%c", this, '\n');
 
 	if (lines <= 0 || rows <= 0) {
 		this->row_count_ = this->line_count_ = 0;
@@ -24,13 +29,13 @@ void Matrix::constructor_(long const lines, long const rows) {
 
 	// Выделение памяти под вектор указателей
 	this->ptr_ = new int *[static_cast<std::size_t>(lines)];
-	::trace << "Адрес созданной памяти: " << this->ptr_ << '\n';
+	trace("Адрес созданной памяти: %p%c", this->ptr_, '\n');
 
 	// Выделение памяти под каждую строку
 	for (long i = 0; i < lines; i++) {
 		this->ptr_[i] = new int[static_cast<std::size_t>(rows)];
-		::trace << "Выделение памяти под строку " << i
-			<< " по адресу: " << this->ptr_[i] << '\n';
+		trace("Выделение памяти под строку %ld%s%p%c", i,
+		      " по адресу: ", this->ptr_[i], '\n');
 	}
 }
 
@@ -67,17 +72,14 @@ Matrix::Matrix(Matrix const & other) {
 Matrix::~Matrix() {
 	while (this->line_count_--) {
 		// Трассировка каждой удаляемой строки
-		::trace << "Номер удаляемой строки: " //
-			<< this->line_count_	      //
-			<< "; Её адрес: " << this->ptr_[this->line_count_]
-			<< '\n';
+		trace("Номер удаляемой строки: %ld%s%p%c", this->line_count_,
+		      "; Её адрес: ", this->ptr_[this->line_count_], '\n');
 		delete[] this->ptr_[this->line_count_];
 	}
 
 	// Трассировка удаляемой матрицы
-	::trace << "Адрес удаляемой памяти: " //
-		<< this->ptr_ << ';'	      //
-		<< " В объекте под адресом: " << this << '\n';
+	trace("Адрес удаляемой памяти: %p%c%s%p%c", this->ptr_, ';',
+	      " В объекте под адресом: ", this, '\n');
 	delete[] this->ptr_;
 }
 
