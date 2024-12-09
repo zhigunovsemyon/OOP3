@@ -226,8 +226,10 @@ Matrix & Matrix::substract(Matrix const & other)
 	return *this;
 }
 
-void Matrix::calcCellForMult_(Matrix const & first, Matrix const & second,
-			      int const line, int const row)
+void Matrix::calcCellForMult_(Matrix const & first,
+			      Matrix const & second,
+			      int const line,
+			      int const row)
 {
 	int & cell = this->ptr_[line][row];
 

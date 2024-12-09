@@ -88,12 +88,14 @@ public:
 
 	bool operator==(Matrix const & other) const { return isEqualTo(other); }
 
-	bool operator!=(Matrix const & other) const {
+	bool operator!=(Matrix const & other) const
+	{
 		return !isEqualTo(other);
 	}
 
 	// Транспонирование матрицы
-	Matrix & transpose() {
+	Matrix & transpose()
+	{
 		return (this->row_count_ == this->line_count_)
 			       ? transposeSq_()
 			       : transposeNonSq_();
@@ -125,30 +127,34 @@ public:
 
 	// Скрещивание матрицы и cout
 	friend inline std::ostream & operator<<(std::ostream & ost,
-						Matrix const & m) {
+						Matrix const & m)
+	{
 		m.print(ost);
 		return ost;
 	}
 
 	// Произвдение числа на матрицу равно произведению матрицы на число
-	friend inline Matrix operator*(int const i, Matrix & m) {
+	friend inline Matrix operator*(int const i, Matrix & m)
+	{
 		return m.product(i);
 	}
 
 private:
 	/*Сокрытые поля*/
-	int ** ptr_;	  // Указатель на непосредственно матрицу
+	int ** ptr_; // Указатель на непосредственно матрицу
 	long row_count_;  // Число столбцов
 	long line_count_; // Число строк
 
 	/*Сокрытые методы*/
-	Matrix & transposeSq_();    // Транспонирование квадратной матрицы
+	Matrix & transposeSq_(); // Транспонирование квадратной матрицы
 	Matrix & transposeNonSq_(); // Транспонирование не квадрат матрицы
 
 	void constructor_(long const lines,
 			  long const rows); // Общий конструктор
 
 	// Подсчёт ячейки при умножении матриц
-	void calcCellForMult_(Matrix const & first, Matrix const & second,
-			      int const line, int const row);
+	void calcCellForMult_(Matrix const & first,
+			      Matrix const & second,
+			      int const line,
+			      int const row);
 };
