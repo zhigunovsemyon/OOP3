@@ -6,14 +6,15 @@
 */
 #include "matr.h" /* Матрица и iostream */
 
-int main(void) {
+int main(void)
+{
 	// Создание прямоугольной матрицы
 	int m, n;
 	std::cout << "Число строк: ";
 	std::cin >> m;
 	std::cout << "Число столбцов: ";
 	std::cin >> n;
-	
+
 	/*Проверка на корректность ввода*/
 	if (!std::cin.good()) {
 		std::cout << "Некорректный ввод!\n";
