@@ -139,14 +139,24 @@ public:
 		return m.product(i);
 	}
 
+	friend std::istream & operator>>(std::istream & ist, Matrix & m)
+	{
+		for (long i {0} ; i < m.line_count_; ++i) {
+			for (long j = {0}; j < m.row_count_; ++j) {
+				ist >> m[i][j];
+			}
+		}
+		return ist;
+	}
+
 private:
 	/*Сокрытые поля*/
-	int ** ptr_; // Указатель на непосредственно матрицу
+	int ** ptr_;	  // Указатель на непосредственно матрицу
 	long row_count_;  // Число столбцов
 	long line_count_; // Число строк
 
 	/*Сокрытые методы*/
-	Matrix & transposeSq_(); // Транспонирование квадратной матрицы
+	Matrix & transposeSq_();    // Транспонирование квадратной матрицы
 	Matrix & transposeNonSq_(); // Транспонирование не квадрат матрицы
 
 	void constructor_(long const lines,

@@ -1,5 +1,6 @@
 #include "matr.h"
 #include <cstring> /*std::memcpy()*/
+#include <istream>
 #include <random>  /*std::mt19937_64, std::random_device*/
 #include <utility> /*swap() */
 
@@ -380,3 +381,4 @@ Matrix::Line Matrix::operator[](long i) const
 	 * размерами*/
 	return {ptr_[i], row_count_};
 }
+
