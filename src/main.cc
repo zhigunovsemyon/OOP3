@@ -10,7 +10,10 @@ int main(void)
 {
 	Matrix m{ };
 	std::cin >> m;
+	int n;
+	std::cin >> n;
 	std::cout << m;
+	std::cout << n;
 	
 	return EXIT_SUCCESS;
 }
