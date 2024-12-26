@@ -144,8 +144,12 @@ public:
 		for (long i {0} ; i < m.line_count_; ++i) {
 			for (long j = {0}; j < m.row_count_; ++j) {
 				ist >> m[i][j];
+				if (ist.bad())
+					return ist;
 			}
 		}
+		if (m.row_count_ == 0 || m.line_count_ == 0)
+			ist.setstate(std::ios_base::failbit);
 		return ist;
 	}
 

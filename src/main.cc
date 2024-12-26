@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	Matrix m{2};
+	Matrix m{ };
 	std::cin >> m;
 	std::cout << m;
 	
