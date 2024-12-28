@@ -129,6 +129,9 @@ public:
 	friend inline std::ostream & operator<<(std::ostream & ost,
 						Matrix const & m)
 	{
+		if(m.line_count_ == 0|| 0 == m.row_count_ )
+			return ost;
+		ost << m.line_count_ << ' ' << m.row_count_ << '\n';
 		m.print(ost);
 		return ost;
 	}
